@@ -31,10 +31,16 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def decrease_units(self, quantity):
+        if self.available_units >= quantity:
+            self.available_units -= quantity
+            self.save()
+            return True
+        return False
 
 class Customer(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='customer')
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='customer')
     name = models.CharField(max_length=250)
     address = models.TextField() 
     phone_num = models.CharField(max_length=20)
@@ -48,5 +54,6 @@ class Order(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='order')
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
-    
+    order_date = models.DateTimeField(auto_now_add=True)
+
     

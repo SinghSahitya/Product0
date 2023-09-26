@@ -7,5 +7,8 @@ urlpatterns = [
     path("", views.home, name='home'),
     path('seller_signup/', views.seller_signup, name='seller_signup'),
     path('item/new/', views.ItemFormView.as_view(), name='new_item'),
-    path('inventory/', views.seller_items, name='inventory')
+    path('inventory/', views.seller_items, name='inventory'),
+    path('sales/', views.sales, name='sales'),
+    path('new_sale/', views.new_sale, name='new_sale'),
+    path('new_customer/', views.new_customer, name='new_customer'),
 ]

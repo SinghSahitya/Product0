@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Your Customers</h1>
+    <a href="{% url 'new_customer' %}" class="btn btn-primary">New Customer</a>
+</div>
+
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Sr.</th>
+            <th>Customer Name</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.phone_num }}</td>
+                <td>{{ customer.address }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No customers found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}

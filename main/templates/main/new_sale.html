@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1>New Sale</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.customer.id_for_label }}">Customer</label>
+            {% if customers %}
+                <select class="form-control" id="{{ form.customer.id_for_label }}" name="{{ form.customer.name }}">
+                    <option value="" selected disabled>Select a customer</option>
+                    {% for customer in customers %}
+                        <option value="{{ customer.id }}">{{ customer.name }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <p>No customers to choose from.</p>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.item.id_for_label }}">Item</label>
+            {% if items %}
+                <select class="form-control" id="{{ form.item.id_for_label }}" name="{{ form.item.name }}">
+                    <option value="" selected disabled>Select an item</option>
+                    {% for item in items %}
+                        <option value="{{ item.id }}">{{ item.title }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <p>No items to choose from.</p>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.price.id_for_label }}">Price</label>
+            {{ form.price }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.quantity.id_for_label }}">Quantity</label>
+            {{ form.quantity }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

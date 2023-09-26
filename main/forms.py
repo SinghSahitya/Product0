@@ -22,3 +22,20 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = {'title', 'available_units' }
+
+
+class NewSaleForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['customer', 'item', 'price', 'quantity']
+
+    def __init__(self, seller, *args, **kwargs):
+        super(NewSaleForm, self).__init__(*args, **kwargs)
+        self.fields['item'].queryset = Item.objects.filter(seller=seller)
+        self.fields['customer'].queryset = Customer.objects.filter(seller=seller)
+
+
+class NewCustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['name', 'phone_num', 'address']

@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Sales</h1>
+    <a href="{% url 'new_sale' %}" class="btn btn-primary">New Sale</a>
+</div>
+
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Sr.</th>
+            <th>Customer Name</th>
+            <th>Phone Number</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price Per Unit</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.customer.name }}</td>
+                <td>{{ order.customer.phone_num }}</td>
+                <td>{{ order.item.title }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.price }}</td>
+                <td></td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No previous sales found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
