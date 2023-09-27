@@ -29,6 +29,10 @@ def logout_view(request):
 def sales(request):
     seller = Seller.objects.get(id=request.user.seller.id)
     orders = Order.objects.filter(seller=seller)
+
+    for order in orders:
+        order.total = order.price * order.quantity
+
     return render(request, "main/sales.html", {"orders":orders})
 
 
@@ -108,3 +112,24 @@ def new_customer(request):
         form = NewCustomerForm()
 
     return render(request, 'main/new_customer.html', {'form':form})
+
+
+
+def customer_orders(request):
+    item_name = request.GET.get('item_name', '')
+
+    if item_name:
+        search_results = Order.objects.filter(item__title__icontains=item_name)
+    else:
+        search_results = []
+
+    context = {'search_results': search_results}
+    return render(request, 'main/customer_order.html', context)
+
+
+class SellerProfileView(DetailView):
+    model = Seller
+    template_name = 'main/profile.html'
+    
+    def get_object(self, queryset=None):
+        return self.request.user.seller

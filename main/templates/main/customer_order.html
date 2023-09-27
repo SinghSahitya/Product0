@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<h1>Customer Orders</h1>
+<form method="GET" action="{% url 'customer_orders' %}">
+    <div class="form-group">
+        <label for="item_name">Search for Item:</label>
+        <input type="text" class="form-control" id="item_name" name="item_name" placeholder="Enter item name">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<h2>Search Results</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sr.</th>
+            <th>Customer</th>
+            <th>Phone Number</th>
+            <th>Price Per Unit</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in search_results %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ order.customer.name }}</td>
+                <td>{{ order.customer.phone_num }}</td>
+                <td>{{ order.price }}</td>
+                <td>{{ order.quantity }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No results found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

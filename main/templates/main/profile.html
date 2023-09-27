@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <h1 class="page-title">Seller Details</h1>
+
+    <div class="row text-black">
+      <div class="col-md-6">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ object.user.username }}" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ object.user.email }}" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="address" class="form-control" id="address" name="address" value="{{ object.address }}" readonly>
+          </div>
+      </div>
+      <div class="col-md-6">
+        
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" value="{{ object.user.first_name }}" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="companyName" name="companyName" value="{{ object.user.last_name }}" readonly>
+          </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ object.phone }}" readonly>
+          </div>
+      </div>
+    </div>
+  
+
+{% endblock %}

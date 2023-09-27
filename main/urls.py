@@ -11,4 +11,6 @@ urlpatterns = [
     path('sales/', views.sales, name='sales'),
     path('new_sale/', views.new_sale, name='new_sale'),
     path('new_customer/', views.new_customer, name='new_customer'),
+    path('customer_orders/', views.customer_orders, name='customer_orders'),
+    path('profile/', views.SellerProfileView.as_view(), name='profile'),
 ]
